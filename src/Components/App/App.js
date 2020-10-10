@@ -11,7 +11,6 @@ class App extends Component {
     eqHistory: [],
     stringToCalculate: '',
     stringToSend: '',
-    currentResult: 0
   }
 
   componentDidMount() {
@@ -40,15 +39,13 @@ class App extends Component {
   }
 
   handleEquals = () => {
-    console.log('clicked equals')
     let currentResult = eval(this.state.stringToCalculate)
-    console.log(currentResult)
     let stringToSend = this.state.stringToCalculate.concat('=').concat(currentResult)
-    console.log(stringToSend)
+
     this.setState({
       ...this.state,
-      currentResult: currentResult,
-      stringToSend: stringToSend
+      stringToSend: stringToSend,
+      stringToCalculate: currentResult
     }, this.handleSubmit)
   }
 
@@ -62,6 +59,14 @@ class App extends Component {
       })
   }
 
+  handleClear = () => {
+    this.setState({
+      ...this.state,
+      stringToCalculate: ''
+    },
+      console.log(this.state.stringToCalculate))
+  }
+
 
 
   render() {
@@ -70,8 +75,8 @@ class App extends Component {
 
         {JSON.stringify(this.state.eqHistory)}
         <CalcDisplay stringToCalculate={this.state.stringToCalculate} />
-        <KeyPad handleInput={this.handleInput} handleEquals={this.handleEquals} stringToCalculate={this.state.stringToCalculate} />
-        <EqList history={this.state.eqHistory} />
+        <KeyPad handleInput={this.handleInput} handleEquals={this.handleEquals} stringToCalculate={this.state.stringToCalculate} handleClear={this.handleClear} />
+        <EqList eqHistory={this.state.eqHistory} />
       </div>
     );
   }

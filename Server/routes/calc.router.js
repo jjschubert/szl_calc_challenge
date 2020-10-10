@@ -11,12 +11,11 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
 
 calcStrings.push(req.body.stringToSend)
-console.log('updated calcStrings', calcStrings)
 
+//limits the array to most recent 10
 if (calcStrings.length >= 10) {
     calcStrings.shift()
 }
-console.log(calcStrings)
 res.sendStatus(201);
 })
 

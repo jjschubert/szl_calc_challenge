@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { Button, TextField } from '@material-ui/core'
+import { Button} from '@material-ui/core'
 
 class KeyPad extends Component {
   render() {
     return (
       <div className="keypad">
-             <TextField variant='outlined' value={this.props.stringToCalculate} />
-        <br />
         <Button variant='contained' value='7' onClick={() => this.props.handleInput('7')}>7</Button>
         <Button variant='contained' value='8' onClick={() => this.props.handleInput('8')}>8</Button>
         <Button variant='contained' value='9' onClick={() => this.props.handleInput('9')}>9</Button>
@@ -30,7 +28,7 @@ class KeyPad extends Component {
         <br />
         {/* make =, clear btn double size */}
         <Button variant='contained' value='=' onClick={() => this.props.handleEquals()}>=</Button>
-        <Button variant='contained' onClick={() => this.setState({ ...this.state, stringToCalculate: '' })}>CLEAR</Button>
+        <Button variant='contained' onClick={() => this.props.handleClear()}>CLEAR</Button>
       </div>
     );
   }
