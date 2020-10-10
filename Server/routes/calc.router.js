@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
 calcStrings.push(req.body.stringToSend)
 
 //limits the array to most recent 10
-if (calcStrings.length >= 10) {
+if (calcStrings.length >= 11) {
     calcStrings.shift()
 }
 res.sendStatus(201);

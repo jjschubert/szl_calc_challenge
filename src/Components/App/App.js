@@ -54,6 +54,10 @@ class App extends Component {
     axios.post('/calc', this.state)
       .then(response => {
         this.getEquations();
+        // this.setState({
+        //   ...this.state, 
+        //   stringToCalculate: ''
+        // })
       }).catch(error => {
         console.log('error in POST', error);
       })
