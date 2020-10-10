@@ -29,7 +29,7 @@ class KeyPad extends Component {
 
         <br />
         {/* make =, clear btn double size */}
-        <Button variant='contained' value='=' onClick={() => this.props.handleEquals}>=</Button>
+        <Button variant='contained' value='=' onClick={() => this.props.handleEquals()}>=</Button>
         <Button variant='contained' onClick={() => this.setState({ ...this.state, stringToCalculate: '' })}>CLEAR</Button>
       </div>
     );
