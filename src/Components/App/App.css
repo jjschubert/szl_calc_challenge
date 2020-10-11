@@ -19,6 +19,7 @@ body {
   display: inline;
   float: left;
   outline: black solid 1px;
+  max-height: 236px;
   }
 
   .app {
