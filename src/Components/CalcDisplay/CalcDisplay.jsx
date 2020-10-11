@@ -6,7 +6,7 @@ class CalcDisplay extends Component {
   render() {
     return (
       <div className="display">
-        <TextField variant='outlined' value={this.props.stringToCalculate} />
+        <TextField style={{minWidth: '256px', backgroundColor: 'white'}} variant='outlined' value={this.props.stringToCalculate} />
       </div>
     );
   }

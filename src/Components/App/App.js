@@ -4,9 +4,22 @@ import KeyPad from '../KeyPad/KeyPad.jsx'
 import CalcDisplay from '../CalcDisplay/CalcDisplay.jsx'
 import EqList from '../EqList/EqList.jsx';
 import axios from 'axios'
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+
+const customTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#ffad33',
+    },
+    secondary: {
+      main: '#A9A9A9',
+    }
+  },
+});
 
 class App extends Component {
-
+  
   state = {
     eqHistory: [],
     stringToCalculate: '',
@@ -39,14 +52,21 @@ class App extends Component {
   }
 
   handleEquals = () => {
-    let currentResult = eval(this.state.stringToCalculate)
-    let stringToSend = this.state.stringToCalculate.concat('=').concat(currentResult)
+
+    let currentResult;
+    let stringToSend;
+    try {
+    currentResult = eval(this.state.stringToCalculate)
+    stringToSend = this.state.stringToCalculate.concat('=').concat(currentResult)
 
     this.setState({
       ...this.state,
       stringToSend: stringToSend,
-      stringToCalculate: currentResult
+      stringToCalculate: currentResult.toString()
     }, this.handleSubmit)
+     } catch (error) {
+      alert('Please enter a valid equation')
+    }
   }
 
   handleSubmit = () => {
@@ -54,10 +74,6 @@ class App extends Component {
     axios.post('/calc', this.state)
       .then(response => {
         this.getEquations();
-        // this.setState({
-        //   ...this.state, 
-        //   stringToCalculate: ''
-        // })
       }).catch(error => {
         console.log('error in POST', error);
       })
@@ -75,13 +91,15 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-
-        {JSON.stringify(this.state.eqHistory)}
+      <ThemeProvider theme={customTheme}>
+      <div className='app'>
+        <div className="calc">
         <CalcDisplay stringToCalculate={this.state.stringToCalculate} />
         <KeyPad handleInput={this.handleInput} handleEquals={this.handleEquals} stringToCalculate={this.state.stringToCalculate} handleClear={this.handleClear} />
+        </div>
         <EqList eqHistory={this.state.eqHistory} />
       </div>
+      </ThemeProvider>
     );
   }
 }
